@@ -40,7 +40,8 @@ class Account:
             # Withdraw
             # Deposit
             # Transfer
-            
+
+'''
 # Client Objects
 client_1 = Client(1, "Alessio", "alessio@gmail.com", 19)
 client_2 = Client(1, "Jake", "jake@gmail.com", 23)
@@ -75,3 +76,4 @@ account_2.deposit(124)
 account_1.withdraw(15)
 account_1.interest()
 print("account_2 final balance: ", account_2.balance)
+'''
