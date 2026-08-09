@@ -34,7 +34,7 @@ class Account:
             print("insufficient funds")
             
     def interest(self):
-        self.balance = self.balance+ (self.balance * self.interest_rate)
+        self.balance = self.balance + (self.balance * self.interest_rate)
         print("balance = ", self.balance)
         # Behaviors (methods)
             # Withdraw
