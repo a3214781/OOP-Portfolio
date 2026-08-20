@@ -1,27 +1,38 @@
 class Branch:
     def __init__(self, number, name, suburb, phone, currently_open=False):
-        self.number = number
-        self.name = name
-        self.suburb = suburb
-        self.phone = phone
-        self.currently_open = currently_open
-    
-    def open(self):
-        self.currently_open = True
-        print("We are now open")
-    
+        self.__number = number
+        self.__name = name
+        self.__suburb = suburb
+        self.__phone = phone
+        self.__currently_open = currently_open
+        
+    def updateInfo(self, name, suburb, phone):
+        self.__name = name
+        self.__suburb = suburb
+        if isinstance(phone, (int, float)):
+            self.__phone = phone
+        
+    def opened(self):
+        self.__currently_open = True
+        print("We are now open!")
+
     def closed(self):
-        self.currently_open = False
-        print("We are now closed")
-    
+        self.__currently_open = False
+        print("We are now closed!")
+
     def update_phone(self, new_num):
-        self.phone = new_num
+        self.__phone = new_num
         print("Branch number updated")
         print("The new branch number is ", new_num)
-    
+
     def __str__(self):
-        status = "Open" if self.currently_open else "Closed"
-        return f"Branch #{self.number}: {self.name} ({self.suburb}) - Phone: {self.phone} [{status}]"
+        status = "Open" if self.__currently_open else "Closed"
+        return f"Branch # = {self.__number} Name = {self.__name} Suburb = {self.__suburb} Phone = {self.__phone} Status=[{status}]"
+
+    def __repr__(self):
+        return f"Branch: number={self.__number}, name={self.__name}, Suburb={self.__suburb}, Phone={self.__phone} Status={self.__currently_open}"
+
+        # Include enough attribute values to identify the object’s current state.
 '''
 # Branch 1
 branch_1 = Branch(1, "main", "Adelaide", "0431 324 432")

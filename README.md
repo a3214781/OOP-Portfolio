@@ -1,10 +1,23 @@
-# OOP-Portfolio
+# Record Your Weekly Code Review
 
-## Project 1: Finance System
+Instructions
 
-### Scenario
-
-A finance organisation requires a software system to manage its clients, financial accounts and transaction records. The system must represent the information associated with each client, maintain the accounts they hold and support common financial operations such as deposits, withdrawals and transfers.
-
-As the organisation expands, the system must remain organised, maintainable and capable of supporting additional account types, business rules and reporting requirements. Object-oriented programming principles will be used to model the organisation's operations through classes, objects, relationships and clearly separated responsibilities.
-
+Create a code review record in the main folder of your project.
+    Use either a README.md file or a clearly named text file such as code_reviews.txt.
+    Use the same file throughout the semester so your reviews remain organised in one location.
+Add a heading for the current workshop.
+    Include the workshop number or week.
+    Include the date of the review.
+    Include the name of the person who reviewed the code with you.
+Briefly record the discussion.
+    Identify the class, method, module, diagram, or section of code that was reviewed.
+    Summarise the feedback, suggestion, question, or problem discussed.
+    Explain why the discussion was relevant to the current stage of the project.
+Record the resulting development.
+    Describe at least one change made because of the review.
+    Include the relevant code or other evidence where appropriate.
+    Explain how the change improved the code or your understanding.
+Retain the review record with the project.
+    Update the file after each weekly review.
+    Ensure each review has its own heading.
+ 
