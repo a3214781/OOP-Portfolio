@@ -1,65 +1,89 @@
 class Transaction:
-    def __init__(self, identifier, trasaction_type, amount, desc, status="Pending"):
-        self.__identifier = identifier
-        self.__trasaction_type = trasaction_type
-        self.__amount = amount
-        self.__desc = desc
-        self.__status = status
+    def __init__(self, identifier, transaction_type, amount, desc, status="Pending"):
+        # Represents a single financial transaction with basic validation.
+        if isinstance(identifier, int) and not isinstance(identifier, bool) and identifier > 0:
+            self.__identifier = identifier
+        else:
+            self.__identifier = 0
+            print("Identifier is invalid.")
 
+        # transaction_type must be a string
+        if isinstance(transaction_type, str):
+            self.__transaction_type = transaction_type
+        else:
+            self.__transaction_type = "No Type"
+            print("Transaction type is invalid.")
+        
+        # amount must be a non-negative number, not a bool
+        if isinstance(amount, (int, float)) and not isinstance(amount, bool) and amount >= 0:
+            self.__amount = amount
+        else:
+            self.__amount = 0
+            print("Amount is invalid.")
+
+        # desc must be a string
+        if isinstance(desc, str):
+            self.__desc = desc
+        else:
+            self.__desc = "No Description"
+            print("Description is invalid.")
+
+        # status must be one of the three allowed states
+        if isinstance(status, str) and status in ["Pending", "Processed", "Cancelled"]:
+            self.__status = status
+        else:
+            self.__status = "Pending"
+            print("Status is invalid.")
+
+    # Behaviour: the only way __status can become "Processed"
     def processed(self):
-        self.status = "Processed"
-        print("transaction processes sucsessfully")
+        self.__status = "Processed"
+        print("Transaction processed successfully")
 
+    # Behaviour: the only way __status can become "Cancelled"
     def cancelled(self):
-        self.status = "Cancelled"
-        print("transaction cancelled sucsessfully")
+        self.__status = "Cancelled"
+        print("Transaction cancelled successfully")
 
+    # Setter: desc is the only field editable after creation, validated the same as the constructor
     def set_desc(self, new_desc):
         if isinstance(new_desc, str):
-        # BUG: fix later
-            self.desc = new_desc
-    
+            self.__desc = new_desc
+            print("Description updated")
+        else:
+            print("Description is invalid. Description not changed.")
+
+     # Getters — read-only access to every private attribute
     def get_desc(self):
         return self.__desc
-    
-    '''
-    def set_identifier(self, new_id):
-        if isinstance(new_id, int) and not isinstance(new_id, bool) and new_id > 0:
-            self.__identifier = new_id
-    '''
-      
+
     def get_identifier(self):
         return self.__identifier
-    
-    def set_trasaction_type(self, new_type):
+
+    # Setter: transaction_type is editable after creation
+    def set_transaction_type(self, new_type):
         if isinstance(new_type, str):
-            self.__trasaction_type = new_type
-        
-    def get_trasaction_type(self):
-        return self.__trasaction_type
-        
+            self.__transaction_type = new_type
+        else:
+            print("Transaction type is invalid. Type not changed.")
+
+    def get_transaction_type(self):
+        return self.__transaction_type
+
+    def get_amount(self):
+        return self.__amount
+    
+    # No setter for status — it only changes via processed()/cancelled() above
+    def get_status(self):
+        return self.__status
+
+    # Human-readable string, e.g. for print(transaction)
     def __str__(self):
-        return f"{self.__identifier}, Type = {self.__trasaction_type}, Amount = {self.__amount}, Description = \"{self.__desc}\", Status = {self.__status}"
-    # Include the transaction identifier, type, amount, description, and current status.
-
+        return (f"Identifier = {self.__identifier}, Type = {self.__transaction_type}, "
+                f"Amount = {self.__amount}, Description = \"{self.__desc}\", "
+                f"Status = {self.__status}")
+    # Developer-facing representation, e.g. for repr(transaction)
     def __repr__(self):
-        return f"Transaction: identifier={self.__identifier}, trasaction_type={self.__trasaction_type}, amount={self.__amount}, desc={self.__desc}, status={self.__status}"
-    # Include enough attribute values to identify the object’s current state.
-
-'''
-# Transaction 1
-trasnaction_1 = Transaction(1, "Purchase", 15.5, "bought lunch")
-print(trasnaction_1)
-trasnaction_1.processed()
-print(trasnaction_1)
-trasnaction_1.description("new description")
-print(trasnaction_1)
-print("---------------")
-# Transaction 2
-trasnaction_2 = Transaction(2, "Purchase", 67.8, "new shirt")
-print(trasnaction_2)
-trasnaction_2.processed()
-print(trasnaction_2)
-trasnaction_2.description("shirt new")
-print(trasnaction_2)
-'''
+        return (f"Transaction: identifier={self.__identifier}, "
+                f"transaction_type={self.__transaction_type}, amount={self.__amount}, "
+                f"desc={self.__desc}, status={self.__status}")
