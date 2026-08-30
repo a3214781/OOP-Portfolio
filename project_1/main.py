@@ -88,9 +88,9 @@ print()
 
 # Account info update
 print(f"account_4 before: {account_4}")
-account_4.updateAccountInfo("holiday fund", "savings")
+account_4.update_account_info("holiday fund", "savings")
 print(f"account_4 after: {account_4}")
-account_4.updateAccountInfo(123, "savings")  # invalid — not changed
+account_4.update_account_info(123, "savings")  # invalid — not changed
 print()
 
 # Client info update

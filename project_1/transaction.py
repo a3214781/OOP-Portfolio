@@ -60,13 +60,15 @@ class Transaction:
 
     # processed: the only way __status can become "Processed"
     def processed(self):
-        self.__status = "Processed"
-        print("Transaction processed successfully")
+        if self.__status == "Pending":
+            self.__status = "Processed"
+            print("Transaction processed successfully")
 
     # cancelled: the only way __status can become "Cancelled"
     def cancelled(self):
-        self.__status = "Cancelled"
-        print("Transaction cancelled successfully")
+        if self.__status == "Pending":
+            self.__status = "Cancelled"
+            print("Transaction cancelled successfully")
 
     # Setters: set_desc: desc is one of only 2 field editable after creation and is validated the same as the constructor
     def set_desc(self, new_desc):

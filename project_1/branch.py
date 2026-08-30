@@ -1,12 +1,10 @@
 class Branch:
-    # Represents a bank branch with contact details and an open/closed state.
+    """The Branch class is responsible for representing a physical branch
+    location (branch_number, name, suburb, phone, currently_open) and its
+    open/closed state.
 
-    """The Branch class is responsible for representing a Branch of the 
-    bank through (branch_number, name, suburb, phone, currently_open).
-
-    The branch class is responsible for holding clients and executing transactions        
-    Branch does not manage who is assigned to it, that responsibility belongs 
-    to the Client class."""
+    Branch does not track which clients prefer it, that responsibility
+    belongs to the Client class."""
 
     def __init__(self, branch_number, name, suburb, phone, currently_open="Closed"):
         # branch_number must be an int, not a bool

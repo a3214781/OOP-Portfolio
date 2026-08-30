@@ -1,7 +1,7 @@
 class Account:
     """The Account class is responsible for representing a Account 
     of the client through (number, name, account_type, balance, 
-    interest_rate), for managing which Account belong to which Clients.
+    interest_rate).
 
     Account does not manage who it belongs to,that responsibility belongs 
     to the Client class though addAccount()."""
@@ -59,7 +59,7 @@ class Account:
         return self.__interest_rate
 
     # Setter: name and account_type change together, validated the same as the constructor.
-    def updateAccountInfo(self, new_name, new_account_type):
+    def update_account_info(self, new_name, new_account_type):
         if isinstance(new_name, str) and isinstance(new_account_type, str):
             self.__name = new_name
             self.__account_type = new_account_type

@@ -37,3 +37,23 @@ This directly connects to our portfolio where it asks us to add validation to al
 **Resulting development:**
 After this feedback all `isinstance()` methods where reviewed and fixed, for example the `Client` email check is just `isinstance(email, str) and "@" in email`, not a full email-format.
 This has improved the filtering and over engineering of the project, resulting in a more refined code and and filtering process as well as a better understandign of the usefulness of `isinstance()` in future projects.
+---
+
+## Design Review — Workshop 3-2
+**Design concerns:**
+- one duplicate responsibility i noticed was the use of
+    ```python
+        if isinstance(identifier, int) and not isinstance(identifier, bool) and VARIABLE > 0:
+    ```
+  where this filtering is repeated across multiple constructors and multiple classes. this is a form of duplicated responsibility where each class is resolving the same problems.
+
+**SOLID (SRP):**
+- The Client class is currently doing arguably more than 1 job. it currently is responsible for representing a clients identity, holding their lists of accounts (which could be done in a separate class) and tracking preferences such as preferred branch. For now this is ok although as teh project develops this could bet messier and cause problems.
+- The Account, Transaction, and Branch class are currently satisfying SRP reasonably well, with each one having a single, clear, responsibility with clear methods.
+
+
+**What's working well:**
+- the encapsulation and validation that was applied to all classes is consistent and protects its private attributes and validates parameters uniformly, so all invalid data can't infiltrate the system  
+
+**What might need reconsidering later:**
+- The validation logic, although working well, is duplicated across all four classes. In future iterations all classes can use a uniform filtering system rather than each class re-implementing the same isinstance() checks independently.
