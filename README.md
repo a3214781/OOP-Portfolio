@@ -18,8 +18,7 @@ def __repr__(self):
             f"transaction_type={self.__transaction_type}, amount={self.__amount}, "
             f"desc={self.__desc}, status={self.__status}")
 ```
-This improved the ambiguity of the `__repr__` as well as giving me a better understanding of the usefulness of `__repr__()` functions compared to `__str__` for future projects.
-
+**Improvements** This improved the ambiguity of the `__repr__` as well as giving me a better understanding of the usefulness of `__repr__()` functions compared to `__str__` for future projects.
 ---
 
 # Week 3 Code Review
@@ -27,7 +26,8 @@ This improved the ambiguity of the `__repr__` as well as giving me a better unde
 **Reviewed with:** Lance
 **Reviewed:** The entire project was reviewed throughout this code review, in particular `isinstance()` validation across all four class constructors was looked into and feedback was given.
 
-**Question:** At what point does validation become over-filtering? for example using password/username rules as a comparison (minimum length, character requirements, duplicate checks) — how much validation is actually necessary before it's just adding checks because more validation is technically possible?
+**Question:** 
+At what point does validation become over-filtering? for example using password/username rules as a comparison (minimum length, character requirements, duplicate checks) — how much validation is actually necessary before it's just adding checks because more validation is technically possible?
 
 **Answer:** 
 Validations should match what is required, type checks and else statements are usually essential in projects and should be the default. rules such as enforcing specific email formats, minimum age limits, or strict phone number formats go beyond what is needed and are unnecessary. Adding rules like these just because they are possible is solving problems that never needed to be solved.
@@ -37,8 +37,9 @@ This directly connects to our portfolio where it asks us to add validation to al
 
 **Resulting development:**
 After this feedback all `isinstance()` methods where reviewed and fixed, for example the `Client` email check is just `isinstance(email, str) and "@" in email`, not a full email-format.
-This has improved the filtering and over engineering of the project, resulting in a more refined code and and filtering process as well as a better understandign of the usefulness of `isinstance()` in future projects.
 
+**Improvements** 
+This has improved the filtering and over engineering of the project, resulting in a more refined code and and filtering process as well as a better understandign of the usefulness of `isinstance()` in future projects.
 ---
 
 ## Design Review — Workshop 3-2
