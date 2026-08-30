@@ -18,6 +18,7 @@ def __repr__(self):
             f"transaction_type={self.__transaction_type}, amount={self.__amount}, "
             f"desc={self.__desc}, status={self.__status}")
 ```
+
 **Improvements** This improved the ambiguity of the `__repr__` as well as giving me a better understanding of the usefulness of `__repr__()` functions compared to `__str__` for future projects.
 ---
 
@@ -39,7 +40,7 @@ This directly connects to our portfolio where it asks us to add validation to al
 After this feedback all `isinstance()` methods where reviewed and fixed, for example the `Client` email check is just `isinstance(email, str) and "@" in email`, not a full email-format.
 
 **Improvements** 
-This has improved the filtering and over engineering of the project, resulting in a more refined code and and filtering process as well as a better understandign of the usefulness of `isinstance()` in future projects.
+This has improved the filtering and over engineering of the project, resulting in a more refined code and and filtering process as well as a better understanding of the usefulness of `isinstance()` in future projects.
 ---
 
 ## Design Review — Workshop 3-2
