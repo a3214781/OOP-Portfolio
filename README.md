@@ -40,8 +40,8 @@ This directly connects to our portfolio where it asks us to add validation to al
 **Resulting development:**
 After this feedback all `isinstance()` methods where reviewed and fixed, for example the `Client` email check is just `isinstance(email, str) and "@" in email`, not a full email-format.
 
-**Improvements** 
-This has improved the filtering and over engineering of the project, resulting in a more refined code and filtering process as well as a better understanding of the usefulness of `isinstance()` in future projects.
+**Improvements** This has improved the filtering and over engineering of the project, resulting in a more refined code and filtering process as well as a better understanding of the usefulness of `isinstance()` in future projects.
+
 ---
 
 ## Design Review — Workshop 3-2
