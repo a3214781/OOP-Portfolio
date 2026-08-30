@@ -2,5 +2,9 @@
     "python.REPL.enableREPLSmartSend": false,
     "cSpell.ignoreWords": [
         "repr"
+    ],
+    "cSpell.words": [
+        "Alessio",
+        "Behaviour"
     ]
 }
