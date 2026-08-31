@@ -7,7 +7,7 @@ class Transaction:
     that responsibility belongs to the Account, Client, and Branch classes respectively."""
 
     def __init__(self, identifier, transaction_type, amount, desc, status="Pending"):
-        # Represents a single financial transaction with basic validation.
+        # identifier must be an int to help identify a specific transaction
         if isinstance(identifier, int) and not isinstance(identifier, bool) and identifier > 0:
             self.__identifier = identifier
         else:
@@ -21,7 +21,7 @@ class Transaction:
             self.__transaction_type = "No Type"
             print("Transaction type is invalid.")
 
-        # amount must be a non-negative number, not a bool
+        # amount must be a positive number, and not a bool
         if isinstance(amount, (int, float)) and not isinstance(amount, bool) and amount >= 0:
             self.__amount = amount
         else:
@@ -42,7 +42,7 @@ class Transaction:
             self.__status = "Pending"
             print("Status is invalid.")
 
-    # Getters
+    # Getters: retrieve private variable values from __init__ function
     def get_desc(self):
         return self.__desc
 
@@ -70,7 +70,9 @@ class Transaction:
             self.__status = "Cancelled"
             print("Transaction cancelled successfully")
 
-    # Setters: set_desc: desc is one of only 2 field editable after creation and is validated the same as the constructor
+    # Setters: used to alter previously named parameters in the constructor
+    #
+    # set_desc: changes the transaction description, must be a string
     def set_desc(self, new_desc):
         if isinstance(new_desc, str):
             self.__desc = new_desc
@@ -85,12 +87,10 @@ class Transaction:
         else:
             print("Transaction type is invalid. Type not changed.")
 
-    # Human-readable string
     def __str__(self):
-        return (f"Identifier = {self.__identifier}, Type = {self.__transaction_type}, "
-                f"Amount = {self.__amount}, Description = \"{self.__desc}\", "
-                f"Status = {self.__status}")
-    # Developer-facing representation
+        return (f"Identifier is {self.__identifier}, Type is {self.__transaction_type}, "
+                f"Amount is {self.__amount}, Description is \"{self.__desc}\", "
+                f"Status is {self.__status}")
 
     def __repr__(self):
         return (f"Transaction: identifier={self.__identifier}, "

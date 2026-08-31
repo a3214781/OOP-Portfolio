@@ -7,7 +7,7 @@ class Branch:
     belongs to the Client class."""
 
     def __init__(self, branch_number, name, suburb, phone, currently_open="Closed"):
-        # branch_number must be an int, not a bool
+        # branch_number must be an int, and must not be a bool value
         if isinstance(branch_number, int) and not isinstance(branch_number, bool):
             self.__branch_number = branch_number
         else:
@@ -21,28 +21,28 @@ class Branch:
             self.__name = "No Name"
             print("Name is invalid.")
 
-        # suburb must be a string
+        # suburb must be in the form of a string
         if isinstance(suburb, str):
             self.__suburb = suburb
         else:
             self.__suburb = "No Suburb or Location"
             print("Suburb or Location is invalid.")
 
-        # phone must be a string
+        # phone must be a string to account for (+) numbers
         if isinstance(phone, str):
             self.__phone = phone
         else:
             self.__phone = "No Phone"
             print("Phone Number is invalid.")
 
-        # branch_state must be one of the two allowed states
+        # branch_state must be one of only two allowed states, Open or Closed.
         if isinstance(currently_open, str) and currently_open in ["Open", "Closed"]:
             self.__branch_state = currently_open
         else:
             self.__branch_state = "Closed"
             print("Branch state is invalid.")
 
-    # NEW: getters — every other class has these, Branch was missing them entirely
+    # Getters: This is used to get private variables from the constructor without calling them
     def get_branch_number(self):
         return self.__branch_number
 
@@ -58,7 +58,9 @@ class Branch:
     def get_branch_state(self):
         return self.__branch_state
 
-    # updateInfo: validates name, suburb, phone and sets new information together through one function
+    # Setter: sets new values of attributes formed in the constructor
+    #
+    # updateInfo: sets name, suburb, phone and sets new information together through one function, validating it all together
     def updateInfo(self, name, suburb, phone):
         if isinstance(name, str) and isinstance(suburb, str) and isinstance(phone, str):
             self.__name = name

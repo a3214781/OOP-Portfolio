@@ -19,8 +19,7 @@ def __repr__(self):
             f"desc={self.__desc}, status={self.__status}")
 ```
 
-**Improvements** This improved the ambiguity of the `__repr__` as well as giving me a better understanding of the usefulness of `__repr__()` functions compared to `__str__` for future projects.
-
+**Improvements** This improved the comprehensiveness of the `__repr__` as well as giving me a better understanding of the usefulness of `__repr__()` functions compared to `__str__` for future projects.
 ---
 
 # Week 3 Code Review
@@ -41,16 +40,15 @@ This directly connects to our portfolio where it asks us to add validation to al
 After this feedback all `isinstance()` methods where reviewed and fixed, for example the `Client` email check is just `isinstance(email, str) and "@" in email`, not a full email-format.
 
 **Improvements** This has improved the filtering and over engineering of the project, resulting in a more refined code and filtering process as well as a better understanding of the usefulness of `isinstance()` in future projects.
-
 ---
 
 ## Design Review — Workshop 3-2
 **Design concerns:**
-- one duplicate responsibility i noticed was the use of
+- One duplicate responsibility I noticed was the use of:
     ```python
         if isinstance(identifier, int) and not isinstance(identifier, bool) and VARIABLE > 0:
     ```
-  where this filtering is repeated across multiple constructors and multiple classes. this is a form of duplicated responsibility where each class is resolving the same problems.
+  where this filtering is repeated across multiple constructors and multiple classes. This is a form of duplicated responsibility where each class is resolving the same problems.
 
 **SOLID (SRP):**
 - The Client class is currently doing arguably more than 1 job. it currently is responsible for representing a clients identity, holding their lists of accounts (which could be done in a separate class) and tracking preferences such as preferred branch. For now this is ok although as the project develops this could be messier and cause problems.
