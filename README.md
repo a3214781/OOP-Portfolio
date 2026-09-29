@@ -60,3 +60,70 @@ After this feedback all `isinstance()` methods where reviewed and fixed, for exa
 
 **What might need reconsidering later:**
 - The validation logic, although working well, is duplicated across all four classes. In future iterations all classes can use a uniform filtering system rather than each class re-implementing the same isinstance() checks independently.
+
+## Week 4 Code Review
+else
+ordering
+
+## Week 5 Code Review
+
+repeatign code use healper method
+
+
+## Week 6 Code Review
+
+Difference beweteen protected and privete adn when to use when. does it have soemthign to do wiht inheritence 
+does account_type needa be protected besit its beign overidden anyway
+Transaction records should remain accessible without allowing the collection to be replaced directly.?
+AND Record successful transactions.?
+
+
+## Review your Project 1 checkpoint feedback.
+Identify issues relating to the object model.
+Identify issues relating to class responsibilities.
+Identify issues relating to relationships.
+Identify issues relating to encapsulation or visibility.
+Identify issues relating to inheritance.
+Identify issues relating to code quality or readability.
+
+## AI vs Human class code
+**Prompt:** Can you create a class for a new python banking project which is able to deposit, withdraw, and view account transaction which are found an an additional class transactions.
+
+Identify similarities between the two solutions.
+    Compare the classes created.
+    Compare attributes.
+    Compare methods.
+    Compare relationships.
+    Compare inheritance.
+    Compare validation and encapsulation.
+Identify differences between the two solutions.
+For each important difference, consider why it occurred.
+    Was information missing from the prompt?
+    Did the AI make an assumption?
+    Did it choose a different but valid design?
+    Did it use a concept that has not been taught?
+    Did it misunderstand part of the problem?
+    Did it introduce unnecessary complexity?
+Identify anything in the generated solution that would not meet the requirements of this course.
+Decide which solution is stronger for the selected problem.
+    Your solution may be stronger.
+    The generated solution may contain a useful design decision.
+    Different parts of each solution may be stronger.
+Justify the comparison using OOP concepts rather than personal preference.
+
+
+Task 4: Improve the prompt...
+Task 5: Compare the Two AI Responses...
+Task 6: Verify Before You Trust...
+
+
+
+WEEK 7
+
+order MRO
+
+Diaminod order
+
+1 -2- 1
+
+usually be the left ro right ordergin
