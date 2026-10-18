@@ -127,3 +127,7 @@ Diaminod order
 1 -2- 1
 
 usually be the left ro right ordergin
+
+
+#code review
+more poriziotn with ratign for attack adn defence and a factor muliply or divide for ratign nad values
