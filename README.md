@@ -163,7 +163,7 @@ def withdraw(self, amount):
  
 # Week 7 Code Review
 **Date:** Monday, September 21
-**Reviewed with:** [name]
+**Reviewed with:** Lance
 **Reviewed:** Account, SavingsAccount and EverydayAccount.
  
 **Question:** How does Python decide which method to use when a class inherits from another, and why can't `Account` be created on its own?

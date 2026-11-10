@@ -22,7 +22,13 @@ class Necromancer:
 
         # Inventory is created by and belongs to this Necromancer
         # (composition), so the starting resources are passed straight in.
-        self.__inventory = Inventory(necrotic, spirit, bone, flesh, ectoplasm)
+        self.__inventory = Inventory(
+            ectoplasm=ectoplasm,
+            necrotic=necrotic,
+            spirit=spirit,
+            bone=bone,
+            flesh=flesh,
+        )
         # The undead list is private so undead can only be added or removed
         # through summon_undead() and dismiss_undead().
         self.__controlled_undead = []

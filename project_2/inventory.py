@@ -94,15 +94,24 @@ class Inventory:
         # The current amounts are listed in the same order as the
         # requirements, so the same position in each list is the same resource.
         current = [
-            self.__ectoplasm,
             self.__necrotic,
             self.__spirit,
             self.__bone,
             self.__flesh,
+            self.__ectoplasm,
         ]
 
         for position in range(len(current)):
-            if requirements[position] > current[position]:
+            amount = requirements[position]
+            # A cost must be a whole positive number (zero or more)
+            # spend can never add resources back.
+            if (
+                not isinstance(amount, int)
+                or isinstance(amount, bool)
+                or amount < Inventory.MIN_QUANTITY
+            ):
+                return False
+            if amount > current[position]:
                 return False
 
         return True
@@ -116,11 +125,11 @@ class Inventory:
 
         # The check above passed, so every amount is available. The order is
         # the same as in resource_requirements().
-        self.__ectoplasm -= requirements[0]
-        self.__necrotic -= requirements[1]
-        self.__spirit -= requirements[2]
-        self.__bone -= requirements[3]
-        self.__flesh -= requirements[4]
+        self.__necrotic -= requirements[0]
+        self.__spirit -= requirements[1]
+        self.__bone -= requirements[2]
+        self.__flesh -= requirements[3]
+        self.__ectoplasm -= requirements[4]
 
         print(
             f"You spent (necrotic, spirit, bone, flesh, ectoplasm): "
