@@ -1,148 +1,177 @@
 from client import Client
-from account import Account
 from branch import Branch
-from transaction import Transaction
+from account import Account
+from savings_account import SavingsAccount
+from everyday_account import EverydayAccount
+
+print("=== Project 1: Finance ===")
+print()
 
 # Clients
 client_1 = Client(1, "Alessio", "alessio@gmail.com", 19)
 client_2 = Client(2, "Jake", "jake@gmail.com", 23)
-client_3 = Client(3, "Dave", "dave@gmail.com", 35)
-
-# Accounts
-account_1 = Account(1, "user 1", "savings", 1000, 0.05)
-account_2 = Account(2, "expenses", "spending", 200, 0.01)
-account_3 = Account(3, "subscription", "savings", 10000, 0.05)
-account_4 = Account(4, "holiday", "spending", 2000, 0.01)
-
-# Transactions
-transaction_1 = Transaction(1, "Essential", 15.5, "bought lunch")
-transaction_2 = Transaction(2, "Lifestyle", 67.8, "new shirt")
-transaction_3 = Transaction(3, "Financial", 1500, "rent")
 
 # Branches
 branch_1 = Branch(1, "Head Office", "Adelaide", "+61 431 324 432")
 branch_2 = Branch(2, "Regional Hub", "Alice Springs",
                   "+61 432 657 423", "Open")
-branch_3 = Branch(3, "Coastal Bureau", "Darwin", "+61 433 987 654")
 
-# Demonstrate __str__() on one instance of each class
+# Accounts (one of each specialised type)
+savings = SavingsAccount(1, "Holiday Fund", 1000, 0.05)
+everyday = EverydayAccount(2, "Spending", 2000)
+
+print("--- Properties ---")
 print(client_1)
-print(branch_1)
-print(account_1)
-print(transaction_1)
-print()
-
-# Client-Account
-client_1.add_account(account_1)
-client_1.add_account(account_2)
-client_1.add_account(account_1)          # duplicate — rejected
-client_1.add_account("not an account")   # wrong type — rejected
-
-print(f"{client_1.get_name()}'s accounts:", client_1.get_accounts())
-
-client_1.remove_account(account_1)
-print(f"{client_1.get_name()}'s accounts after removal:",
-      client_1.get_accounts())
-print("account_1 still exists:", account_1)
-
-client_1.remove_account(account_3)  # rejected
-print()
-
-# Association: Client-Branch
-client_1.set_preferred_branch(branch_1)
-client_2.set_preferred_branch(branch_2)
-
-print(f"{client_1.get_name()}'s preferred branch:",
-      client_1.get_preferred_branch())
-print(f"{client_2.get_name()}'s preferred branch:",
-      client_2.get_preferred_branch())
-
-client_1.set_preferred_branch("not a branch")  # wrong type — rejected
-
-client_1.set_preferred_branch(branch_3)
-print(f"{client_1.get_name()}'s new preferred branch:",
-      client_1.get_preferred_branch())
-print(f"{client_2.get_name()}'s preferred branch (unchanged):",
-      client_2.get_preferred_branch())
-print()
-
-# Account operations: (deposit, withdraw, overdraw, invalid values)
-print(f"account_1 balance before deposit: {account_1.get_balance()}")
-account_1.deposit(500)
-print(f"account_1 balance after deposit: {account_1.get_balance()}")
-
-print(f"account_2 balance before withdraw: {account_2.get_balance()}")
-account_2.withdraw(50)
-print(f"account_2 balance after withdraw: {account_2.get_balance()}")
-
-print(f"account_2 balance before overdraw attempt: {account_2.get_balance()}")
-account_2.withdraw(10000)  # insufficient funds — rejected
+print(f"Client name: {client_1.name}, email: {client_1.email}")
 print(
-    f"account_2 balance after overdraw attempt (unchanged): {account_2.get_balance()}")
-
-account_1.deposit(-50)     # invalid amount — rejected
-account_1.withdraw("123")  # invalid type — rejected
+    f"Branch: {
+        branch_1.name} in {
+            branch_1.suburb} ({
+                branch_1.branch_state})")
+print(savings)
+print(everyday)
 print()
 
-# Account info update
-print(f"account_4 before: {account_4}")
-account_4.update_account_info("holiday fund", "savings")
-print(f"account_4 after: {account_4}")
-account_4.update_account_info(123, "savings")  # not changed - invalid
+print("--- Client holds different account types ---")
+client_1.add_account(savings)
+client_1.add_account(everyday)
+# Duplicate - rejected
+client_1.add_account(savings)
+# Wrong type - rejected
+client_1.add_account("not an account")
+for number, account in client_1.accounts.items():
+    print(f"  {number}: {account.account_type}")
+client_1.preferred_branch = branch_1
+print(f"Preferred branch: {client_1.preferred_branch.name}")
 print()
 
-# Client info update
-print(f"client_2 email before: {client_2.get_email()}")
-client_2.set_email("jake.new@gmail.com")
-print(f"client_2 email after: {client_2.get_email()}")
-
-client_2.set_email("not-an-email.com")  # invalid, no "@" — rejected
-print(f"client_2 email unchanged: {client_2.get_email()}")
+print("--- Retrieve an account through the client ---")
+retrieved_account = client_1.get_account(1)
+print(retrieved_account)
+# No such account number
+client_1.withdraw_from(99, 50)
+retrieved_account.deposit(100)
 print()
 
-# Transaction operations
-print(f"transaction_1 status before: {transaction_1.get_status()}")
-transaction_1.processed()
-print(f"transaction_1 status after: {transaction_1.get_status()}")
+print("--- Inherited behaviour: deposit ---")
+savings.deposit(500)
+everyday.deposit(300)
+print(f"Savings balance: {savings.balance}")
+print(f"Everyday balance: {everyday.balance}")
+print()
 
-print(f"transaction_2 status before: {transaction_2.get_status()}")
-transaction_2.cancelled()
-print(f"transaction_2 status after: {transaction_2.get_status()}")
+print("--- Overridden behaviour: withdraw ---")
+print("Savings (min balance is", SavingsAccount.MIN_BALANCE, ")")
+client_1.withdraw_from(1, 400)    # Valid
+client_1.withdraw_from(1, 1500)   # Breaks minimum balance
+print("Everyday (max withdrawal is", EverydayAccount.MAX_WITHDRAW, ")")
+client_1.withdraw_from(2, 200)   # Valid
+client_1.withdraw_from(2, 600)   # Above the limit
+print()
 
-# Invalid transition
+print("--- Polymorphism: same call, different rules ---")
+# The loop never checks which kind of account it has.
+for account in client_1.accounts.values():
+    print(f"{account.account_type} withdraw(600):")
+    client_1.withdraw_from(account.number, 600)
+print()
+
+print("--- Processing the transaction history ---")
+print(f"Savings has {savings.transaction_count()} transactions")
+print("Deposits only:")
+for transaction in savings.transactions_of_type("Deposit"):
+    print("  ", transaction)
+print("Amounts above 450:")
+for transaction in savings.transactions_above(450):
+    print("  ", transaction)
+print("Full history:")
+savings.display_transactions()
+print()
+
+print("--- Transaction records (created by the account) ---")
+for account in (savings, everyday):
+    print(f"{account.account_type} transactions:")
+    for transaction in account.transactions:
+        print("  ", transaction)
+print()
+
+print("--- Invalid operations create no transactions ---")
+history_count_before = len(savings.transactions)
+savings.deposit(-50)
+savings.withdraw("123")
+client_1.withdraw_from(1, 999999)
+history_count_after = len(savings.transactions)
 print(
-    f"transaction_1 status before second processed() call: {transaction_1.get_status()}")
-transaction_1.processed()
-print(f"transaction_1 status after: {transaction_1.get_status()}")
-
-transaction_3.set_desc("March rent payment")
-print(f"transaction_3 updated description: {transaction_3.get_desc()}")
-transaction_3.set_desc(12345)  # invalid — not changed
+    f"Transactions before: {history_count_before}, "
+    f"after: {history_count_after}")
 print()
 
-# Branch operations
-print(f"branch_3 status before: {branch_3.get_branch_state()}")
-branch_3.opened()
-print(f"branch_3 status after: {branch_3.get_branch_state()}")
-
-branch_2.closed()
-print(f"branch_2 status after closed(): {branch_2.get_branch_state()}")
-
-print(f"branch_1 phone before: {branch_1.get_phone()}")
-branch_1.update_phone("+61 400 111 222")
-print(f"branch_1 phone after: {branch_1.get_phone()}")
-
-branch_1.update_phone(12345)  # invalid — not changed
+print("--- isinstance() ---")
+for account in (savings, everyday):
+    print(f"{type(account).__name__}: is an Account = "
+          f"{isinstance(account, Account)}, "
+          f"is SavingsAccount = {isinstance(account, SavingsAccount)}, "
+          f"is EverydayAccount = {isinstance(account, EverydayAccount)}")
 print()
 
-# Branch info update
-print(f"branch_2 before: {branch_2}")
-branch_2.updateInfo("Regional Hub North", "Alice Springs", "+61 432 000 111")
-print(f"branch_2 after: {branch_2}")
+print("--- Interest (SavingsAccount only) ---")
+savings.apply_interest()
 print()
 
-# repr() demonstration
-print(repr(client_3))
-print(repr(account_3))
-print(repr(transaction_3))
-print(repr(branch_3))
+print("--- Updates ---")
+client_2.email = ("jake.new@gmail.com")
+print(f"client_2 email: {client_2.email}")
+# Invalid - rejected
+client_2.email = ("not-an-email.com")
+branch_2.update_phone("+61 400 111 222")
+print(f"branch_2 phone: {branch_2.phone}")
+print()
+
+print("--- repr() ---")
+print(repr(client_2))
+print(repr(savings))
+print(repr(everyday))
+print(repr(branch_2))
+print(repr(savings.transactions[0]))
+
+print()
+print("--- Exceptions ---")
+
+# SavingsAccount: normal use, then a rule break, then carrying on.
+print("Savings: normal withdrawal")
+client_1.withdraw_from(1, 50)
+
+savings_balance_before = savings.balance
+savings_count_before = savings.transaction_count()
+
+print("Savings: withdrawal that breaks the minimum balance")
+client_1.withdraw_from(1, 5000)
+print(f"Balance unchanged: {savings.balance == savings_balance_before}")
+print(f"History unchanged: "
+      f"{savings.transaction_count() == savings_count_before}")
+
+print("Savings: the program carries on")
+client_1.withdraw_from(1, 20)
+print()
+
+# EverydayAccount: the same three steps with its own rule.
+print("Everyday: normal withdrawal")
+client_1.withdraw_from(2, 50)
+
+everyday_balance_before = everyday.balance
+everyday_count_before = everyday.transaction_count()
+
+print("Everyday: withdrawal over the limit")
+client_1.withdraw_from(2, 700)
+print(f"Balance unchanged: {everyday.balance == everyday_balance_before}")
+print(f"History unchanged: "
+      f"{everyday.transaction_count() == everyday_count_before}")
+
+print("Everyday: the program carries on")
+client_1.withdraw_from(2, 20)
+print()
+
+# Client: an account that doesn't exist.
+print("Client: account that doesn't exist")
+client_1.withdraw_from(99, 50)
+print("The program is still running.")

@@ -1,0 +1,113 @@
+<diagram program="umletino" version="15.1"><zoom_level>5</zoom_level><element><id>UMLClass</id><coordinates><x>265</x><y>310</y><w>230</w><h>185</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Account
+--
+#number: int
+#name: str
+#balance: float
+#transactions: list[Transaction]
+{static} #next_transaction_id: int
+--
++Account(number: int, name: str, balance: float)
++number: int {property}
++name: str {property}
++balance: float {property}
++account_type: str {property}
++transactions: list[Transaction] {property}
++transaction_count(): int
++transactions_of_type(transaction_type: str): list[Transaction]
++transactions_above(amount: float): list[Transaction]
++display_transactions(): None
++update_account_info(new_name: str): None
+#record_transaction(transaction_type: str, amount: float, desc: str): Transaction
++deposit(amount: float): None
++withdraw(amount: float): None {abstract}
++__str__(): str
++__repr__(): str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>670</x><y>320</y><w>280</w><h>145</h></coordinates><panel_attributes>Transaction
+--
+-identifier: int
+-transaction_type: str
+-amount: float
+-desc: str
+-status: str
+--
++Transaction(identifier: int, transaction_type: str, amount: float, desc: str, status: str = "Pending")
++identifier: int {property}
++transaction_type: str {property}
++amount: float {property}
++desc: str {property}
++status: str {property}
++processed(): None
++cancelled(): None
++set_desc(new_desc: str): None
++set_transaction_type(new_type: str): None
++__str__(): str
++__repr__(): str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>565</y><w>225</w><h>70</h></coordinates><panel_attributes>EverydayAccount
+--
+{static} +MAX_WITHDRAW: int = 500
+--
++EverydayAccount(number: int, name: str, balance: float)
++max_withdrawal: int {property}
++withdraw(amount: float): None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>565</y><w>220</w><h>70</h></coordinates><panel_attributes>SavingsAccount
+--
+-interest_rate: float
+{static} +MIN_BALANCE: int = 100
+--
++SavingsAccount(number: int, name: str, balance: float, interest_rate: float)
++interest_rate: float {property}
++minimum_balance: int {property}
++apply_interest(): None
++withdraw(amount: float): None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>70</y><w>215</w><h>165</h></coordinates><panel_attributes>Client
+--
+-number: int
+-name: str
+-email: str
+-age: int
+-accounts: dict[int, Account]
+-preferred_branch: Branch
+--
++Client(number: int, name: str, email: str, age: int)
++number: int {property}
++name: str {property}
++email: str {property}
++age: int {property}
++accounts: dict[int, Account] {property}
++preferred_branch: Branch {property}
++set_email(new_email: str): None
++add_account(account: Account): None
++get_account(number: int): Account
++remove_account(number: int): None
++set_preferred_branch(branch: Branch): None
++__str__(): str
++__repr__(): str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>65</y><w>285</w><h>150</h></coordinates><panel_attributes>Branch
+--
+-branch_number: int
+-name: str
+-suburb: str
+-phone: str
+-branch_state: str
+--
++Branch(branch_number: int, name: str, suburb: str, phone: str, currently_open: str = "Closed")
++branch_number: int {property}
++name: str {property}
++suburb: str {property}
++phone: str {property}
++branch_state: str {property}
++update_info(name: str, suburb: str, phone: str): None
++update_phone(new_num: str): None
++opened(): None
++closed(): None
++__str__(): str
++__repr__(): str</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>490</y><w>130</w><h>85</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;150;10;90;240;90;240;10</additional_attributes></element><element><id>Relation</id><coordinates><x>365</x><y>490</y><w>130</w><h>85</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>240;150;240;90;10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>380</y><w>190</w><h>20</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes><additional_attributes>360;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>230</y><w>25</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>145</y><w>180</w><h>25</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*
+m2=0..1
+r2=preferred_branch</panel_attributes><additional_attributes>340;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>25</x><y>240</y><w>135</w><h>35</h></coordinates><panel_attributes>FinanceError
+--
+Extends Exception
+--
+Raised when a Finance rule is broken</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>155</x><y>135</y><w>125</w><h>130</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;raises&gt;&gt;</panel_attributes><additional_attributes>10;240;120;240;120;10;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>155</x><y>250</y><w>120</w><h>120</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;raises&gt;&gt;</panel_attributes><additional_attributes>10;10;120;10;120;220;220;220</additional_attributes></element></diagram>
